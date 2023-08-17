@@ -4,3 +4,5 @@ import "controllers"
 
 import "bootstrap"
 import "@popperjs/core"
+
+//= require rails-ujs

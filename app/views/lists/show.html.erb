@@ -2,7 +2,10 @@
 
 <% @list.bookmarks.each do |bookmark| %>
   <%= bookmark.movie.title %> - <%= bookmark.comment %>
-  <%= link_to 'Delete', list_bookmark_path(@list, bookmark), method: :delete, data: { confirm: "Are you sure?" } %>
-  # PROBLEME DELETE !!!!
+  <%# <%= link_to 'Delete', list_bookmark_path(@list, bookmark), method: :delete, data: { confirm: "Are you sure?" } %>
+
+    <%= form_with url: list_bookmark_path(@list, bookmark), method: :delete do %>
+    <%= submit_tag 'Delete', data: { confirm: "Are you sure?" } %>
+  <% end %>
 
 <% end %>
