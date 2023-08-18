@@ -1,11 +1,36 @@
-<h1> <%= @list.name %> </h1>
+<h1 class="list-title-centered"> <%= @list.name %> </h1>
 
-<% @list.bookmarks.each do |bookmark| %>
-  <%= bookmark.movie.title %> - <%= bookmark.comment %>
-  <%# <%= link_to 'Delete', list_bookmark_path(@list, bookmark), method: :delete, data: { confirm: "Are you sure?" } %>
 
-    <%= form_with url: list_bookmark_path(@list, bookmark), method: :delete do %>
-    <%= submit_tag 'Delete', data: { confirm: "Are you sure?" } %>
+<div class="bookmark-container">
+  <% @list.bookmarks.each do |bookmark| %>
+    <div class="bookmark-box">
+      <img src="<%= bookmark.movie.poster_url %>" alt="<%= bookmark.movie.title %>" class="bookmark-poster">
+      <div class="bookmark-title">
+        <%= bookmark.movie.title %>
+        <span class="bookmark-rating">
+          - <%= bookmark.movie.rating %> <i class="fa fa-star"></i>
+        </span>
+      </div>
+      <div class="bookmark-overview">
+        <%= truncate(bookmark.movie.overview, length: 100) %>  <!-- Limitez l'aperçu à 100 caractères -->
+      </div>
+      <div class="bookmark-comment">
+        <i class="fa fa-quote-left"></i>
+        <%= bookmark.comment %>
+      </div>
+      <%= form_with url: list_bookmark_path(@list, bookmark), method: :delete do %>
+        <%= submit_tag 'Delete', class: 'btn-delete', data: { confirm: "Are you sure?" } %>
+      <% end %>
+    </div>
   <% end %>
+</div>
 
-<% end %>
+
+
+
+<%# <% @list.bookmarks.each do |bookmark| %>
+  <%# <%= bookmark.movie.title %> <%# <%= bookmark.comment %>
+    <%#<%= form_with url: list_bookmark_path(@list, bookmark), method: :delete do %>
+    <%#<%= submit_tag 'Delete', data: { confirm: "Are you sure?" } %>
+  <%#<% end %>
+<%#<% end %>
